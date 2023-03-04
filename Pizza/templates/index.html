@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %} {% load static %} {% block content %}
+<section id="hero">
+  <div class="contenedor">
+    <h2>Bienvenido a nuestra pizzería</h2>
+    <p>¡Prueba nuestras deliciosas pizzas recién horneadas!</p>
+    <a href="#menu" class="btnMenu">Ver menú</a>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="container">
+    <h2>Nuestro menú</h2>
+    {% for producto in productos %}
+    <div class="menu-item">
+      {% if producto.imagen %}
+      <img src="{{producto.imagen.url}}" class="imgP"></img>
+      {% endif %}
+      <h3>{{producto.name}}</h3>
+      <p>{{producto.descripcion}}</p>
+      <span>${{producto.precio}}</span>
+      <a href="{% url 'Add' producto.id %}" class="btn btn-primary btnAdd">Agregar a carrito</a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="locations">
+  <div class="container">
+    <h2>Nuestras ubicaciones</h2>
+    <div class="location">
+      <h3>Sucursal Patria</h3>
+      <p>Dirección: Avenida Patria 136, Zapopan, Jalisco</p>
+      <p>Teléfono: (555) 555-1234</p>
+    </div>
+    <div class="location">
+      <h3>Sucursal Metropark</h3>
+      <p>Dirección: Avenida Economos 6890, Zapopan, Jalisco</p>
+      <p>Teléfono: (555) 555-5678</p>
+    </div>
+  </div>
+</section>
+
+<section id="hours">
+  <div class="container">
+    <h2>Nuestros horarios de atención</h2>
+    <p>Lunes a Viernes: 11am - 9pm</p>
+    <p>Sábados y Domingos: 12pm - 8pm</p>
+  </div>
+</section>
+{%endblock %}
