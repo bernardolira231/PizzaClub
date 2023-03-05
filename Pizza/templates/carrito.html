@@ -12,10 +12,76 @@
   </head>
   <body>
     <div class="container">
-      <a href="/" class="div__a"><- Regresar</a>
+      <a href="/" class="div__a">Regresar</a>
       <h1 class="div__h1">Carrito de compra</h1>
     </div>
     <hr />
-    <div class="col-4">{% include 'cart.html' %}</div>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <div class="alert alert-primary" role="alert">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="row" colspan="3" class="text-center">Carrito</th>
+                </tr>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if request.session.cart.items %} 
+                {% for key, value in request.session.cart.items %}
+                <tr>
+                  <td>{{value.nombre}}</td>
+                  <td>{{value.acumulado}}</td>
+                  <td>
+                    {{value.precio}}
+                    <a
+                      href="{% url 'Add' value.producto_id %}"
+                      class="badge btn btn-dark badge-dark"
+                    >
+                      +</a
+                    >
+                    <a
+                      href="{% url 'Sub' value.producto_id %}"
+                      class="badge btn btn-dark badge-dark"
+                    >
+                      -</a
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td colspan="3">
+                    <div class="alert alert-danger text-center">
+                      Sin Productos
+                    </div>
+                  </td>
+                </tr>
+                {% endif %}
+                <tr>
+                  <th scope="row">Total:</th>
+                  <td colspan="2">$ {{total_carrito}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+            <div class="row text-center">
+              <div class="col-6">
+                <a href="{% url 'cls' %}" class="btn btn-danger">Limpiar</a>
+              </div>
+              <div class="col-6">
+                <a href="#" class="btn btn-success">Guardar</a>
+              </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
   </body>
 </html>
