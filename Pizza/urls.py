@@ -10,4 +10,4 @@ urlpatterns = [
     path('restar/<int:producto_id>', views.restarProducto, name='Sub'),
     path('limpiar/', views.limpiarCarrito, name='cls'),
     path('carrito/', views.carrito, name='Carrito'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
